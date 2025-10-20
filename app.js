@@ -136,7 +136,7 @@ const PUN_I18N = {
         'Imitiere das Lachen einer Person hier',
         'Sprich einen Zungenbrecher dreimal ohne zu stoppen',
         'Tanze 10 Sekunden lang improvisiert und verrückt',
-        'Mache ein Selfie und schreibe „Ich bin am süßesten“',
+        'Mache ein Selfie und schreibe “Ich bin am süßesten”',
         'Halte 30 Sekunden Unterarmstütz',
         'Nimm einen kleinen Schluck eines sicheren Getränks',
         'Erzähle einen flachen Witz',
@@ -208,7 +208,7 @@ const PUN_I18N = {
         'Изобрази чей‑то смех в комнате',
         'Скажи скороговорку трижды без пауз',
         'Станцуй забавный импровизированный танец (10 сек)',
-        'Сделай селфи и напиши «Я самый милый/ая»',
+        'Сделай селфи и напиши “Я самый милый/ая”',
         'Планка 30 секунд',
         'Маленький глоток безопасного напитка',
         'Расскажи плохую шутку, чтобы всех рассмешить',
@@ -530,7 +530,8 @@ const I18N_MAP = {
     labelLanguage: 'Language', start: 'Start', again: 'Roll Again', back: 'Back to Setup',
     modeSingle: 'Single', modeDouble: 'Double', spiceMild: 'Mild', spiceSpicy: 'Spicy',
     enable: 'Enable', dup: 'Duplicate', del: 'Delete', shuffle: 'Shuffle', hide: 'Hide custom contents',
-    addList: 'Add list', defaultListName: 'My list', newListName: 'New list', copySuffix: ' (copy)', untitled: 'Untitled'
+    addList: 'Add list', defaultListName: 'My list', newListName: 'New list', copySuffix: ' (copy)', untitled: 'Untitled',
+    people: 'People', mergeDefault: 'Merge defaults', onlyCustom: 'Custom only', shuffleAll: 'Shuffle all', numberA: 'No. A', numberB: 'No. B', drawing: 'Drawing…', number: 'No.'
   },
   ja: {
     labelMode: 'モード', labelSpice: '強度', labelPair: 'ペア指定', labelCustom: 'カスタム',
@@ -564,7 +565,9 @@ const I18N_MAP = {
     labelTheme: 'Thema', labelBgColor: 'Hintergrund', labelRainbow: 'Regenbogen', labelOpacity: 'Deckkraft', labelSpeed: 'Geschwindigkeit', labelBubbles: 'Blasen',
     labelLanguage: 'Sprache', start: 'Start', again: 'Nochmal', back: 'Zurück zu Setup',
     modeSingle: 'Einzel', modeDouble: 'Duo', spiceMild: 'Mild', spiceSpicy: 'Scharf',
-    enable: 'Aktivieren', dup: 'Duplizieren', del: 'Löschen', shuffle: 'Mischen', hide: 'Eigene Inhalte ausblenden'
+    enable: 'Aktivieren', dup: 'Duplizieren', del: 'Löschen', shuffle: 'Mischen', hide: 'Eigene Inhalte ausblenden',
+    addList: 'Neue Liste', defaultListName: 'Meine Strafen', newListName: 'Neue Liste', copySuffix: ' (Kopie)', untitled: 'Ohne Titel',
+    people: 'Personen', mergeDefault: 'Mit Standard mischen', onlyCustom: 'Nur benutzerdef.', shuffleAll: 'Alles mischen', numberA: 'Nr. A', numberB: 'Nr. B', drawing: 'Ziehung…', number: 'Nr.'
   },
   fr: {
     labelMode: 'Mode', labelSpice: 'Intensité', labelPair: 'Duo', labelCustom: 'Perso',
@@ -572,7 +575,9 @@ const I18N_MAP = {
     labelTheme: 'Thème', labelBgColor: 'Fond', labelRainbow: 'Arc-en-ciel', labelOpacity: 'Opacité', labelSpeed: 'Vitesse', labelBubbles: 'Bulles',
     labelLanguage: 'Langue', start: 'Commencer', again: 'Rejouer', back: 'Retour réglages',
     modeSingle: 'Solo', modeDouble: 'Duo', spiceMild: 'Doux', spiceSpicy: 'Épicé',
-    enable: 'Activer', dup: 'Dupliquer', del: 'Supprimer', shuffle: 'Mélanger', hide: 'Masquer contenus perso'
+    enable: 'Activer', dup: 'Dupliquer', del: 'Supprimer', shuffle: 'Mélanger', hide: 'Masquer contenus perso',
+    addList: 'Nouvelle liste', defaultListName: 'Mes punitions', newListName: 'Nouvelle liste', copySuffix: ' (copie)', untitled: 'Sans titre',
+    people: 'Personnes', mergeDefault: 'Mélanger défauts', onlyCustom: 'Perso seul', shuffleAll: 'Tout mélanger', numberA: 'N° A', numberB: 'N° B', drawing: 'Tirage…', number: 'N°'
   },
   ru: {
     labelMode: 'Режим', labelSpice: 'Интенсивность', labelPair: 'Пара', labelCustom: 'Свои',
