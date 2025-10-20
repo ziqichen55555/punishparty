@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>惩罚派对 Punishment Party</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23ff3d71'/%3E%3Ctext x='32' y='40' font-size='28' text-anchor='middle' fill='white'%3E%F0%9F%8E%89%3C/text%3E%3C/svg%3E" />
+    <meta name="description" content="一个搞怪的惩罚游戏页面：输入人数，随机抽取刺激惩罚，支持两人互动。" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="app-header">
+        <h1>惩罚派对 <span class="muted">Punishment Party</span></h1>
+      </header>
+
+      <main>
+        <section class="setup-card" id="setup">
+          <div class="row">
+            <label for="playerCount">人数</label>
+            <div class="field-group">
+              <button class="btn sm" id="minusBtn" aria-label="decrease">-</button>
+              <input id="playerCount" type="number" min="2" max="50" value="6" inputmode="numeric" />
+              <button class="btn sm" id="plusBtn" aria-label="increase">+</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <label id="labelMode">模式</label>
+            <div class="toggle-group" role="group" aria-label="mode">
+              <button class="toggle active" data-mode="single">单人</button>
+              <button class="toggle" data-mode="double">双人</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <label id="labelSpice">强度</label>
+            <div class="toggle-group" role="group" aria-label="spice">
+              <button class="toggle active" data-spice="mild">温和</button>
+              <button class="toggle" data-spice="spicy">刺激</button>
+            </div>
+          </div>
+
+          <div class="row" id="pairRow" hidden>
+            <label id="labelPair">指定双人</label>
+            <div class="pair-picker">
+              <input id="pairA" type="number" min="1" placeholder="号码A" />
+              <span class="sep">↔</span>
+              <input id="pairB" type="number" min="1" placeholder="号码B" />
+              <button class="btn sm" id="swapBtn" title="交换">⇄</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <label id="labelCustom">自定义</label>
+            <div class="custom-box">
+              <div class="custom-controls">
+                <label class="switch"><input id="customEnable" type="checkbox" /> <span id="labelEnableCustom">启用自定义惩罚</span></label>
+                <div class="toggle-group" role="group" aria-label="custom-mode">
+                  <button class="toggle active" data-custom-mode="merge">合并默认</button>
+                  <button class="toggle" data-custom-mode="override">仅用自定义</button>
+                </div>
+              </div>
+              <div class="custom-groups" id="customGroups"></div>
+              <div class="actions">
+                <button class="btn sm" id="addGroupBtn">新列表</button>
+                <button class="btn sm" id="shuffleAllBtn">打乱全部</button>
+              </div>
+              <div class="help" id="helpCustom">支持 {A}/{B} 占位符；启用的列表会参与抽取。</div>
+              <label class="switch"><input id="hideContents" type="checkbox" /> <span id="labelHide">隐藏自定义内容</span></label>
+            </div>
+          </div>
+
+          <div class="row">
+            <label id="labelTheme">主题</label>
+            <div class="theme-box">
+              <div class="theme-line">
+                <label class="inline" id="labelBgColor">背景色</label>
+                <input type="color" id="bgColorInput" value="#0d0f14" />
+                <label class="switch"><input id="rainbowEnable" type="checkbox" checked /> <span id="labelRainbow">彩虹背景</span></label>
+              </div>
+              <div class="theme-line">
+                <label class="inline" id="labelOpacity">强度</label>
+                <input type="range" id="rainbowOpacity" min="0" max="1" step="0.01" value="0.18" />
+                <label class="inline" id="labelSpeed">速度</label>
+                <input type="range" id="rainbowSpeed" min="6" max="60" step="1" value="28" />
+                <label class="switch"><input id="ambientEnable" type="checkbox" /> <span id="labelBubbles">漂浮气泡</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <label id="labelLanguage">语言</label>
+            <div class="toggle-group" role="group" aria-label="language">
+              <button class="toggle active" data-lang="zh">中文</button>
+              <button class="toggle" data-lang="en">English</button>
+              <button class="toggle" data-lang="ja">日本語</button>
+              <button class="toggle" data-lang="ko">한국어</button>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary" id="startBtn">开始游戏</button>
+          </div>
+        </section>
+
+        <section class="arena" id="arena" hidden>
+          <div class="number-strip" id="numberStrip" aria-live="polite"></div>
+
+          <div class="stage">
+            <div class="drum" id="drum">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+            <div class="card" id="resultCard" aria-live="polite">
+              <div class="title" id="resultTitle">准备中…</div>
+              <div class="content" id="resultContent"></div>
+              <div class="meta" id="resultMeta"></div>
+              <div class="actions">
+                <button class="btn" id="againBtn">再来一次</button>
+                <button class="btn ghost" id="backBtn">返回设置</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="history" id="history"></div>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <span>为快乐整点活 — 请理性游戏</span>
+      </footer>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+  </html>
+
+
