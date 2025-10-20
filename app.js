@@ -55,6 +55,370 @@ const PUNISHMENTS = {
   },
 };
 
+// Multilingual punishment pools (fallback to Chinese PUNISHMENTS if lang missing)
+const PUN_I18N = {
+  en: {
+    single: {
+      mild: [
+        'Make an exaggerated face for 10 seconds',
+        'Imitate someone’s laugh here',
+        'Say a tongue twister three times without stopping',
+        'Do a 10-second goofy improvised dance',
+        'Take a selfie and post “I’m the cutest”',
+        'Hold a 30-second plank',
+        'Take a small sip of a safe drink',
+        'Tell a lame joke to make others laugh',
+      ],
+      spicy: [
+        'Share an embarrassing but safe-for-work story',
+        'Let others assign you a 3-emoji action combo',
+        'Spin 5 times eyes closed, then walk straight back',
+        'Sing 10 seconds of the chorus, pitch doesn’t matter',
+        'Exaggeratedly compliment the two people next to you',
+        'Accept one random photo (pose decided by group)',
+      ],
+    },
+    double: {
+      mild: [
+        'Stare at each other for 10 s; first to laugh loses and gets a bonus',
+        'Say one sincere compliment to each other',
+        'Do a synchronized pose on 3-2-1',
+        'Rock–Paper–Scissors best of 3; loser makes an animal sound',
+      ],
+      spicy: [
+        'Back-to-back squats 3 times together',
+        'Strike a choreographed pose together for 5 s',
+        'Imitate each other’s speaking style for one sentence',
+        'Perform a 10-second improv for the group',
+      ],
+    },
+  },
+  es: {
+    single: {
+      mild: [
+        'Haz una mueca exagerada durante 10 segundos',
+        'Imita la risa de alguien presente',
+        'Di un trabalenguas tres veces sin parar',
+        'Baila improvisado y loco 10 segundos',
+        'Hazte un selfie y escribe “soy el/la más cute”',
+        'Plancha 30 segundos',
+        'Bebe un sorbo pequeño de una bebida segura',
+        'Cuenta un chiste malo para hacernos reír',
+      ],
+      spicy: [
+        'Comparte una historia vergonzosa pero adecuada',
+        'Deja que el grupo te asigne 3 gestos/emoji',
+        'Gira 5 vueltas con ojos cerrados y vuelve en línea recta',
+        'Canta 10 s del estribillo, sin importar afinación',
+        'Elogia exageradamente a las dos personas a tu lado',
+        'Acepta una foto aleatoria (pose decide el grupo)',
+      ],
+    },
+    double: {
+      mild: [
+        'Mírense 10 s; quien ría primero pierde y recibe extra',
+        'Díganse un cumplido sincero',
+        'Hagan una pose sincronizada al 3-2-1',
+        'Piedra-Papel-Tijera al mejor de 3; perdedor hace sonido animal',
+      ],
+      spicy: [
+        'Sentadillas espalda con espalda ×3',
+        'Hagan una pose coreográfica 5 s',
+        'Imita el tono del otro por una frase',
+        'Hagan una impro de 10 s para el grupo',
+      ],
+    },
+  },
+  de: {
+    single: {
+      mild: [
+        'Ziehe 10 Sekunden lang eine übertriebene Grimasse',
+        'Imitiere das Lachen einer Person hier',
+        'Sprich einen Zungenbrecher dreimal ohne zu stoppen',
+        'Tanze 10 Sekunden lang improvisiert und verrückt',
+        'Mache ein Selfie und schreibe „Ich bin am süßesten“',
+        'Halte 30 Sekunden Unterarmstütz',
+        'Nimm einen kleinen Schluck eines sicheren Getränks',
+        'Erzähle einen flachen Witz',
+      ],
+      spicy: [
+        'Teile eine peinliche, aber harmlose Geschichte',
+        'Lass die anderen dir eine 3‑Emoji‑Aktion geben',
+        'Schließe die Augen, drehe dich 5 Mal und gehe gerade zurück',
+        'Singe 10 Sek. den Refrain, Tonhöhe egal',
+        'Lobe überschwänglich die zwei neben dir',
+        'Akzeptiere ein Zufallsfoto (Pose wählt die Gruppe)',
+      ],
+    },
+    double: {
+      mild: [
+        '10 Sek. Blickduell; wer zuerst lacht, verliert + extra',
+        'Sagt euch gegenseitig ein ehrliches Kompliment',
+        'Macht eine synchrone Pose bei 3‑2‑1',
+        'Schere‑Stein‑Papier (Best of 3); Verlierer macht ein Tiergeräusch',
+      ],
+      spicy: [
+        'Rücken an Rücken: Kniebeugen ×3',
+        'Gemeinsam Choreo‑Pose 5 Sek.',
+        'Imitiert gegenseitig die Sprechweise (1 Satz)',
+        '10‑Sek. Impro‑Performance für alle',
+      ],
+    },
+  },
+  fr: {
+    single: {
+      mild: [
+        'Fais une grimace exagérée pendant 10 secondes',
+        'Imite le rire de quelqu’un ici',
+        'Dis un virelangue trois fois sans t’arrêter',
+        'Danse improvisée et folle pendant 10 s',
+        'Prends un selfie et poste « Je suis le/la plus mignon·ne »',
+        'Planche 30 s',
+        'Bois une petite gorgée d’une boisson sûre',
+        'Raconte une blague nulle pour faire rire',
+      ],
+      spicy: [
+        'Raconte une histoire gênante mais convenable',
+        'Laisse le groupe te donner un combo de 3 emojis',
+        'Ferme les yeux, tourne 5 fois et reviens en ligne droite',
+        'Chante 10 s du refrain, justesse libre',
+        'Complimente avec emphase les deux personnes à tes côtés',
+        'Accepte une photo au hasard (pose décidée par le groupe)',
+      ],
+    },
+    double: {
+      mild: [
+        '10 s de duel de regards; 1er à rire perd + bonus',
+        'Faites-vous un compliment sincère',
+        'Pose synchronisée au 3‑2‑1',
+        'Pierre‑Feuille‑Ciseaux en 3 manches; perdant imite un animal',
+      ],
+      spicy: [
+        'Squats dos à dos ×3',
+        'Pose chorégraphiée à deux 5 s',
+        'Imitez la façon de parler de l’autre (1 phrase)',
+        'Impro de 10 s pour le groupe',
+      ],
+    },
+  },
+  ru: {
+    single: {
+      mild: [
+        'Сделай преувеличенную гримасу на 10 секунд',
+        'Изобрази чей‑то смех в комнате',
+        'Скажи скороговорку трижды без пауз',
+        'Станцуй забавный импровизированный танец (10 сек)',
+        'Сделай селфи и напиши «Я самый милый/ая»',
+        'Планка 30 секунд',
+        'Маленький глоток безопасного напитка',
+        'Расскажи плохую шутку, чтобы всех рассмешить',
+      ],
+      spicy: [
+        'Поделись неловкой, но приличной историей',
+        'Пусть другие выберут тебе комбо из 3 эмоций/поз',
+        'Закрой глаза, повернись 5 раз и вернись по прямой',
+        'Спой 10 сек. припева, неважно чисто ли',
+        'Скажи с преувеличением комплимент двум рядом',
+        'Разреши сделать одно фото (позу выбирает группа)',
+      ],
+    },
+    double: {
+      mild: [
+        '10 сек. гляделки; кто смеётся — проиграл и получает бонус',
+        'Скажите друг другу искренний комплимент',
+        'Синхронная поза на счёт 3‑2‑1',
+        'Камень‑ножницы‑бумага (до 2 побед); проигравший издаёт звук животного',
+      ],
+      spicy: [
+        'Приседания спина к спине ×3',
+        'Совместная «хорео‑поза» на 5 сек',
+        'Подражайте манере речи друг друга (один предложение)',
+        '10‑сек. импровизация для всех',
+      ],
+    },
+  },
+  pt: {
+    single: {
+      mild: [
+        'Faça uma careta exagerada por 10 segundos',
+        'Imite a risada de alguém aqui',
+        'Fale um trava‑língua 3 vezes sem parar',
+        'Dance improvisado e doidão por 10 segundos',
+        'Tire um selfie e poste “sou o/a mais fofo/a”',
+        'Prancha por 30 segundos',
+        'Tome um gole pequeno de uma bebida segura',
+        'Conte uma piada ruim para fazer rir',
+      ],
+      spicy: [
+        'Conte uma história constrangedora, mas ok',
+        'Deixe o grupo definir um combo de 3 emojis/ações',
+        'De olhos fechados, gire 5 vezes e volte em linha reta',
+        'Cante 10 s do refrão sem se preocupar com afinação',
+        'Elogie exageradamente quem está à sua esquerda e direita',
+        'Aceite uma foto aleatória (pose pelo grupo)',
+      ],
+    },
+    double: {
+      mild: [
+        'Encarem 10 s; quem rir primeiro perde e ganha bônus',
+        'Troquem um elogio sincero',
+        'Façam uma pose sincronizada no 3‑2‑1',
+        'Jokenpô melhor de 3; perdedor imita um animal',
+      ],
+      spicy: [
+        'Agachamentos costas com costas ×3',
+        'Pose coreografada a dois por 5 s',
+        'Imitem o jeito de falar um do outro (1 frase)',
+        'Improviso de 10 s para o grupo',
+      ],
+    },
+  },
+  it: {
+    single: {
+      mild: [
+        'Fai una smorfia esagerata per 10 secondi',
+        'Imita la risata di qualcuno qui',
+        'Di’ uno scioglilingua tre volte senza fermarti',
+        'Fai una danza improvvisata buffa per 10 secondi',
+        'Fatti un selfie e scrivi “sono il/la più carino/a”',
+        'Plank per 30 secondi',
+        'Bevi un piccolo sorso di una bevanda sicura',
+        'Racconta una barzelletta pessima',
+      ],
+      spicy: [
+        'Racconta un episodio imbarazzante ma innocuo',
+        'Lascia che il gruppo ti scelga una combo di 3 emoji/mosse',
+        'A occhi chiusi gira 5 volte e torna dritto',
+        'Canta 10 s del ritornello, stonare concesso',
+        'Fai un complimento esagerato ai due vicini',
+        'Accetta una foto casuale (posa decisa dal gruppo)',
+      ],
+    },
+    double: {
+      mild: [
+        'Guardatevi 10 s; chi ride per primo perde + extra',
+        'Fatevi un complimento sincero',
+        'Fate una posa sincronizzata al 3‑2‑1',
+        'Sasso‑Carta‑Forbice al meglio di 3; chi perde imita un animale',
+      ],
+      spicy: [
+        'Squat schiena contro schiena ×3',
+        'Pose coreografica di coppia per 5 s',
+        'Imitate il modo di parlare dell’altro (1 frase)',
+        'Improvvisazione di 10 s per il gruppo',
+      ],
+    },
+  },
+  th: {
+    single: {
+      mild: [
+        'ทำหน้าตลกเว่อร์ ๆ 10 วินาที',
+        'เลียนเสียงหัวเราะของใครสักคนในที่นี้',
+        'พูดคำเล่นลิ้น 3 รอบโดยไม่หยุด',
+        'เต้นมั่ว ๆ สุดกาว 10 วินาที',
+        'ถ่ายเซลฟี่แล้วพิมพ์ “ฉันน่ารักที่สุด”',
+        'แพลงก์ 30 วินาที',
+        'จิบเครื่องดื่มที่ปลอดภัยเล็กน้อย',
+        'เล่าเรื่องตลกแป้ก ๆ ให้ทุกคนขำ',
+      ],
+      spicy: [
+        'เล่าเรื่องน่าอายที่เหมาะสม',
+        'ให้เพื่อนกำหนดท่าทาง 3 อย่างให้ทำ',
+        'หลับตาหมุน 5 รอบ แล้วเดินตรงกลับ',
+        'ร้องท่อนฮุค 10 วิ โดยไม่ซีเรียสคีย์',
+        'ชมคนซ้ายและขวาแบบเว่อร์ ๆ คนละหนึ่งประโยค',
+        'ยอมให้ถ่ายรูป 1 รูป (ให้เพื่อนเลือกโพส)',
+      ],
+    },
+    double: {
+      mild: [
+        'จ้องตากัน 10 วิ ใครขำก่อนแพ้และโดนเพิ่ม',
+        'ชมกันอย่างจริงใจคนละหนึ่งประโยค',
+        'โพสพร้อมกันตอน 3‑2‑1',
+        'เป่ายิ้งฉุบ 3 เกม ใครแพ้ร้องเสียงสัตว์',
+      ],
+      spicy: [
+        'สควอทพิงหลังกัน 3 ครั้ง',
+        'โพสท่าคู่แบบคอรियोग 5 วิ',
+        'เลียนแบบน้ำเสียงกันคนละ 1 ประโยค',
+        'เล่นโชว์ด้นสด 10 วิ ให้ทุกคนดู',
+      ],
+    },
+  },
+  ja: {
+    single: {
+      mild: [
+        '誇張な表情を10秒キープ',
+        'その場の誰かの笑い声を真似する',
+        '早口言葉を止まらず3回言う',
+        '即興で変なダンスを10秒',
+        '自撮りして「私が一番かわいい」と投稿',
+        'プランク30秒',
+        '安全な飲み物をひと口',
+        '寒いジョークを一つ',
+      ],
+      spicy: [
+        'ちょっと恥ずかしい話（無礼でない）を共有',
+        'みんなに3つの表情/動作コンボを指定してもらう',
+        '目を閉じて5回回り、まっすぐ戻る',
+        'サビを10秒、音程は気にしない',
+        '左右の人を大げさに褒める',
+        'ランダムに1枚撮影（ポーズは皆で決める）',
+      ],
+    },
+    double: {
+      mild: [
+        '10秒見つめ合い。先に笑った方が負け＋おまけ',
+        'お互いに心からの褒め言葉を一言',
+        '3‑2‑1の合図で同時ポーズ',
+        'じゃんけん3本勝負。負けたら動物の鳴き真似',
+      ],
+      spicy: [
+        '背中合わせでスクワット3回',
+        '二人で振付っぽいポーズ5秒',
+        '相手の話し方で一言',
+        '10秒の即興パフォーマンス',
+      ],
+    },
+  },
+  ko: {
+    single: {
+      mild: [
+        '과장된 표정을 10초간 유지',
+        '주변 사람의 웃음을 흉내내기',
+        '혀 꼬이는 말 3번 쉬지 않고 말하기',
+        '즉흥으로 엽기댄스 10초',
+        '셀카 찍고 “내가 제일 귀여움”이라고 올리기',
+        '플랭크 30초',
+        '안전한 음료 한 모금 마시기',
+        '썰렁한 농담 하나 하기',
+      ],
+      spicy: [
+        '민망하지만 무례하지 않은 이야기 공유',
+        '다른 사람이 3개의 이모지 동작 콤보 지정',
+        '눈 감고 제자리 5바퀴 돌고 직선으로 복귀',
+        '후렴 10초, 음정 상관없음',
+        '양옆 사람을 오버스럽게 칭찬',
+        '랜덤 사진 1장 촬영(포즈는 모두가 정함)',
+      ],
+    },
+    double: {
+      mild: [
+        '10초 눈싸움, 먼저 웃으면 패배 + 추가',
+        '서로 진심 어린 칭찬 한마디',
+        '3‑2‑1에 맞춰 동시 포즈',
+        '가위바위보 3판2선승, 진 사람은 동물소리',
+      ],
+      spicy: [
+        '등 맞대고 스쿼트 3회',
+        '즉흥 커플 포즈 5초',
+        '서로의 말투로 한 문장',
+        '10초 즉흥 공연',
+      ],
+    },
+  },
+};
+
 function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
 function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
@@ -90,8 +454,9 @@ function pickParticipants() {
 }
 
 function pickPunishment(participants) {
-  // build pool: consider custom
-  const defaults = PUNISHMENTS[state.mode][state.spice];
+  // build pool by lang + custom
+  const i18nPools = PUN_I18N[state.lang];
+  const defaults = (i18nPools && i18nPools[state.mode] && i18nPools[state.mode][state.spice]) || PUNISHMENTS[state.mode][state.spice];
   let pool = defaults;
   if (state.custom.enabled) {
     const enabledGroups = (state.custom.groups || []).filter(g => g.enabled);
@@ -184,6 +549,65 @@ const I18N_MAP = {
     modeSingle: '싱글', modeDouble: '더블', spiceMild: '순한맛', spiceSpicy: '매운맛',
     enable: '활성화', dup: '복제', del: '삭제', shuffle: '섞기', hide: '사용자 내용 숨기기',
     addList: '리스트 추가', defaultListName: '내 리스트', newListName: '새 리스트', copySuffix: ' (복사본)', untitled: '제목 없음'
+  },
+  es: {
+    labelMode: 'Modo', labelSpice: 'Intensidad', labelPair: 'Pareja', labelCustom: 'Personalizado',
+    labelEnableCustom: 'Activar castigos personalizados', helpCustom: 'Soporta {A}/{B}. Listas activadas entran al sorteo.',
+    labelTheme: 'Tema', labelBgColor: 'Fondo', labelRainbow: 'Arcoíris', labelOpacity: 'Opacidad', labelSpeed: 'Velocidad', labelBubbles: 'Burbujas',
+    labelLanguage: 'Idioma', start: 'Comenzar', again: 'Otra vez', back: 'Volver a ajustes',
+    modeSingle: 'Individual', modeDouble: 'Doble', spiceMild: 'Suave', spiceSpicy: 'Picante',
+    enable: 'Activar', dup: 'Duplicar', del: 'Eliminar', shuffle: 'Mezclar', hide: 'Ocultar contenidos personalizados'
+  },
+  de: {
+    labelMode: 'Modus', labelSpice: 'Intensität', labelPair: 'Paar', labelCustom: 'Benutzerdefiniert',
+    labelEnableCustom: 'Eigene Strafen aktivieren', helpCustom: 'Unterstützt {A}/{B}. Aktivierte Listen werden gezogen.',
+    labelTheme: 'Thema', labelBgColor: 'Hintergrund', labelRainbow: 'Regenbogen', labelOpacity: 'Deckkraft', labelSpeed: 'Geschwindigkeit', labelBubbles: 'Blasen',
+    labelLanguage: 'Sprache', start: 'Start', again: 'Nochmal', back: 'Zurück zu Setup',
+    modeSingle: 'Einzel', modeDouble: 'Duo', spiceMild: 'Mild', spiceSpicy: 'Scharf',
+    enable: 'Aktivieren', dup: 'Duplizieren', del: 'Löschen', shuffle: 'Mischen', hide: 'Eigene Inhalte ausblenden'
+  },
+  fr: {
+    labelMode: 'Mode', labelSpice: 'Intensité', labelPair: 'Duo', labelCustom: 'Perso',
+    labelEnableCustom: 'Activer les punitions perso', helpCustom: 'Prend {A}/{B}. Listes activées incluses au tirage.',
+    labelTheme: 'Thème', labelBgColor: 'Fond', labelRainbow: 'Arc-en-ciel', labelOpacity: 'Opacité', labelSpeed: 'Vitesse', labelBubbles: 'Bulles',
+    labelLanguage: 'Langue', start: 'Commencer', again: 'Rejouer', back: 'Retour réglages',
+    modeSingle: 'Solo', modeDouble: 'Duo', spiceMild: 'Doux', spiceSpicy: 'Épicé',
+    enable: 'Activer', dup: 'Dupliquer', del: 'Supprimer', shuffle: 'Mélanger', hide: 'Masquer contenus perso'
+  },
+  ru: {
+    labelMode: 'Режим', labelSpice: 'Интенсивность', labelPair: 'Пара', labelCustom: 'Свои',
+    labelEnableCustom: 'Включить свои задания', helpCustom: 'Поддержка {A}/{B}. Активные списки участвуют.',
+    labelTheme: 'Тема', labelBgColor: 'Фон', labelRainbow: 'Радуга', labelOpacity: 'Непрозрачность', labelSpeed: 'Скорость', labelBubbles: 'Пузыри',
+    labelLanguage: 'Язык', start: 'Старт', again: 'Ещё раз', back: 'Назад к настройкам',
+    modeSingle: 'Один', modeDouble: 'Пара', spiceMild: 'Лёгкий', spiceSpicy: 'Жгучий',
+    enable: 'Включить', dup: 'Дублировать', del: 'Удалить', shuffle: 'Перемешать', hide: 'Скрыть свои записи'
+  },
+  pt: {
+    labelMode: 'Modo', labelSpice: 'Intensidade', labelPair: 'Par', labelCustom: 'Personalizado',
+    labelEnableCustom: 'Ativar punições personalizadas', helpCustom: 'Suporta {A}/{B}. Listas ativas entram no sorteio.',
+    labelTheme: 'Tema', labelBgColor: 'Fundo', labelRainbow: 'Arco-íris', labelOpacity: 'Opacidade', labelSpeed: 'Velocidade', labelBubbles: 'Bolinhas',
+    labelLanguage: 'Idioma', start: 'Iniciar', again: 'De novo', back: 'Voltar',
+    modeSingle: 'Individual', modeDouble: 'Dupla', spiceMild: 'Suave', spiceSpicy: 'Picante',
+    enable: 'Ativar', dup: 'Duplicar', del: 'Excluir', shuffle: 'Embaralhar', hide: 'Ocultar conteúdos',
+    people: '人数', mergeDefault: '合并默认', onlyCustom: '仅用自定义', addList: '新列表', shuffleAll: '打乱全部', defaultListName: '我的惩罚', numberA: '号码A', numberB: '号码B'
+  },
+  it: {
+    labelMode: 'Modalità', labelSpice: 'Intensità', labelPair: 'Coppia', labelCustom: 'Personalizzato',
+    labelEnableCustom: 'Abilita punizioni personalizzate', helpCustom: 'Supporta {A}/{B}. Liste attive incluse.',
+    labelTheme: 'Tema', labelBgColor: 'Sfondo', labelRainbow: 'Arcobaleno', labelOpacity: 'Opacità', labelSpeed: 'Velocità', labelBubbles: 'Bolle',
+    labelLanguage: 'Lingua', start: 'Avvia', again: 'Di nuovo', back: 'Indietro',
+    modeSingle: 'Singolo', modeDouble: 'Doppio', spiceMild: 'Leggero', spiceSpicy: 'Speziato',
+    enable: 'Attiva', dup: 'Duplica', del: 'Elimina', shuffle: 'Mescola', hide: 'Nascondi contenuti',
+    people: '人数', mergeDefault: '合并默认', onlyCustom: '仅用自定义', addList: '新列表', shuffleAll: '打乱全部', defaultListName: '我的惩罚', numberA: '号码A', numberB: '号码B'
+  },
+  th: {
+    labelMode: 'โหมด', labelSpice: 'ความเข้ม', labelPair: 'เลือกคู่', labelCustom: 'กำหนดเอง',
+    labelEnableCustom: 'เปิดใช้งานบทลงโทษกำหนดเอง', helpCustom: 'รองรับ {A}/{B} รายการที่เปิดจะถูกสุ่ม',
+    labelTheme: 'ธีม', labelBgColor: 'พื้นหลัง', labelRainbow: 'สีรุ้ง', labelOpacity: 'ความทึบ', labelSpeed: 'ความเร็ว', labelBubbles: 'ฟองอากาศ',
+    labelLanguage: 'ภาษา', start: 'เริ่ม', again: 'สุ่มอีก', back: 'กลับ',
+    modeSingle: 'เดี่ยว', modeDouble: 'คู่', spiceMild: 'เบา', spiceSpicy: 'จัด',
+    enable: 'เปิด', dup: 'ทำซ้ำ', del: 'ลบ', shuffle: 'สับไพ่', hide: 'ซ่อนเนื้อหา',
+    people: '人数', mergeDefault: '合并默认', onlyCustom: '仅用自定义', addList: '新列表', shuffleAll: '打乱全部', defaultListName: '我的惩罚', numberA: '号码A', numberB: '号码B'
   }
 };
 
@@ -192,6 +616,7 @@ function applyI18n() {
   const map = {
     '#labelMode': t.labelMode,
     '#labelSpice': t.labelSpice,
+    '#labelPeople': t.people || '人数',
     '#labelPair': t.labelPair,
     '#labelCustom': t.labelCustom,
     '#labelEnableCustom': t.labelEnableCustom,
@@ -217,6 +642,15 @@ function applyI18n() {
   $$('.i18n-del').forEach(el => el.textContent = t.del);
   $$('.i18n-shuffle').forEach(el => el.textContent = t.shuffle);
   const hideLabel = document.querySelector('#labelHide'); if (hideLabel) hideLabel.textContent = t.hide;
+  // custom-mode buttons
+  const cm = document.querySelector('[data-custom-mode="merge"]'); if (cm) cm.textContent = t.mergeDefault || '合并默认';
+  const co = document.querySelector('[data-custom-mode="override"]'); if (co) co.textContent = t.onlyCustom || '仅用自定义';
+  // add/shuffleAll
+  const addBtn = document.querySelector('#addGroupBtn'); if (addBtn) addBtn.textContent = t.addList || '新列表';
+  const saBtn = document.querySelector('#shuffleAllBtn'); if (saBtn) saBtn.textContent = t.shuffleAll || '打乱全部';
+  // pair placeholders
+  const pairA = document.querySelector('#pairA'); if (pairA && t.numberA) pairA.placeholder = t.numberA;
+  const pairB = document.querySelector('#pairB'); if (pairB && t.numberB) pairB.placeholder = t.numberB;
   const [m1, m2] = document.querySelectorAll('[data-mode]');
   if (m1) m1.textContent = t.modeSingle;
   if (m2) m2.textContent = t.modeDouble;
@@ -226,9 +660,10 @@ function applyI18n() {
 }
 
 function startRoll() {
+  const t = I18N_MAP[state.lang] || I18N_MAP.zh;
   const participants = pickParticipants();
   setActiveChips(participants);
-  $('#resultTitle').textContent = '抽取中…';
+  $('#resultTitle').textContent = t.drawing || '抽取中…';
   $('#resultContent').textContent = '';
   $('#resultMeta').textContent = '';
 
@@ -271,10 +706,14 @@ function startRoll() {
         setPickedChips(finalPick);
         const res = pickPunishment(finalPick);
         drum.style.display = 'none';
-        $('#resultTitle').textContent = state.mode === 'single' ? `号码 ${finalPick[0]}` : `号码 ${finalPick[0]} × ${finalPick[1]}`;
+        const numLabel = (I18N_MAP[state.lang] && I18N_MAP[state.lang].number) || '号码';
+        $('#resultTitle').textContent = state.mode === 'single' ? `${numLabel} ${finalPick[0]}` : `${numLabel} ${finalPick[0]} × ${finalPick[1]}`;
         $('#resultContent').textContent = res.text;
-        const spiceTxt = state.spice === 'spicy' ? '刺激' : '温和';
-        $('#resultMeta').textContent = `模式：${state.mode === 'single' ? '单人' : '双人'} · 强度：${spiceTxt}`;
+        const modeTxt = state.mode === 'single' ? (t.modeSingle || '单人') : (t.modeDouble || '双人');
+        const spiceTxt = state.spice === 'spicy' ? (t.spiceSpicy || '刺激') : (t.spiceMild || '温和');
+        const modeLabel = t.labelMode || '模式';
+        const spiceLabel = t.labelSpice || '强度';
+        $('#resultMeta').textContent = `${modeLabel}：${modeTxt} · ${spiceLabel}：${spiceTxt}`;
         addHistory(res);
         showConfetti();
       }
