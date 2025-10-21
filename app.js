@@ -525,7 +525,8 @@ const I18N_MAP = {
     addList: '新列表', shuffleAll: '打乱全部',
     defaultListName: '我的惩罚', numberA: '号码A', numberB: '号码B',
     drawing: '抽取中…', number: '号码',
-    newListName: '新列表', copySuffix: ' 副本', untitled: '未命名'
+    newListName: '新列表', copySuffix: ' 副本', untitled: '未命名',
+    footer: '为快乐整点活 — 请理性游戏'
   },
   en: {
     labelMode: 'Mode', labelSpice: 'Intensity', labelPair: 'Pick Pair', labelCustom: 'Custom',
@@ -538,7 +539,8 @@ const I18N_MAP = {
     addList: 'New list', shuffleAll: 'Shuffle all',
     defaultListName: 'My punishments', numberA: 'No. A', numberB: 'No. B',
     drawing: 'Drawing…', number: 'No.',
-    newListName: 'New list', copySuffix: ' (copy)', untitled: 'Untitled'
+    newListName: 'New list', copySuffix: ' (copy)', untitled: 'Untitled',
+    footer: 'i want to pusnish you!'
   }
 };
 
@@ -562,6 +564,7 @@ function applyI18n() {
     '#startBtn': t.start,
     '#againBtn': t.again,
     '#backBtn': t.back,
+    '#footerText': t.footer || ''
   };
   Object.entries(map).forEach(([sel, text]) => {
     const el = document.querySelector(sel);
@@ -705,7 +708,10 @@ function main() {
       state.custom.enabled = !!saved.enabled;
       state.custom.mode = saved.mode === 'override' ? 'override' : 'merge';
       if (Array.isArray(saved.groups)) state.custom.groups = saved.groups;
-      else if (Array.isArray(saved.items)) state.custom.groups = [{ id: uid(), name: '我的惩罚', enabled: true, items: saved.items }];
+      else if (Array.isArray(saved.items)) {
+        const t0 = I18N_MAP[state.lang] || I18N_MAP.zh;
+        state.custom.groups = [{ id: uid(), name: t0.defaultListName || '我的惩罚', enabled: true, items: saved.items }];
+      }
       if (typeof saved.hide === 'boolean') state.custom.hide = saved.hide;
     }
   } catch (e) {}
@@ -716,6 +722,26 @@ function main() {
     const savedLang = localStorage.getItem('pparty.lang');
     if (savedLang) state.lang = (savedLang === 'zh' || savedLang === 'en') ? savedLang : 'zh';
   } catch (e) {}
+  // normalize legacy names/suffixes to current language
+  (function normalizeGroupNamesOnLang() {
+    const tN = I18N_MAP[state.lang] || I18N_MAP.zh;
+    const legacyDefaults = new Set(['我的惩罚','マイリスト','내 리스트','Mis castigos','Meine Strafen','Mes punitions','Мои наказания','Minhas punições','Le mie punizioni','บทลงโทษของฉัน']);
+    const legacyNewList = new Set(['新列表','新しいリス트','새 리스트','Lista nueva','Neue Liste','Nouvelle liste','Новый список','Nova lista','Nuovo elenco','รายการใหม่']);
+    const legacyCopySuffixes = [' 副本','（コピー）',' (Kopie)',' (copie)',' (copia)',' (копия)',' (cópia)'];
+    (state.custom.groups || []).forEach(g => {
+      if (!g || typeof g.name !== 'string') return;
+      let name = g.name;
+      if (legacyDefaults.has(name)) name = tN.defaultListName || name;
+      if (legacyNewList.has(name)) name = tN.newListName || name;
+      legacyCopySuffixes.forEach(sfx => {
+        if (name.endsWith(sfx)) {
+          name = name.slice(0, -sfx.length) + (tN.copySuffix || '');
+        }
+      });
+      g.name = name;
+    });
+  })();
+
   // reflect to UI
   customEnable.checked = state.custom.enabled;
   hideContents.checked = !!state.custom.hide;
@@ -747,7 +773,8 @@ function main() {
     customGroups.innerHTML = '';
     const list = state.custom.groups || [];
     if (list.length === 0) {
-      state.custom.groups = [{ id: uid(), name: '我的惩罚', enabled: true, items: [] }];
+      const tN = I18N_MAP[state.lang] || I18N_MAP.zh;
+      state.custom.groups = [{ id: uid(), name: tN.defaultListName || '我的惩罚', enabled: true, items: [] }];
     }
     (state.custom.groups || []).forEach((g) => {
       const wrap = document.createElement('div');
@@ -767,7 +794,16 @@ function main() {
         </div>
         <textarea class="cg-items" placeholder="...">${(g.items || []).join('\n')}</textarea>
       `;
-      if (state.custom.hide) wrap.querySelector('.cg-items').setAttribute('data-masked', '1');
+      const ta0 = wrap.querySelector('.cg-items');
+      if (state.custom.hide) {
+        ta0.setAttribute('data-masked', '1');
+        const actual = (g.items || []).join('\n');
+        ta0.value = actual ? '*'.repeat(Math.min(actual.length, 500)) : '';
+        ta0.readOnly = true;
+      } else {
+        ta0.removeAttribute('data-masked');
+        ta0.readOnly = false;
+      }
       customGroups.appendChild(wrap);
     });
     bindGroupEvents();
@@ -784,7 +820,11 @@ function main() {
       const dup = wrap.querySelector('.cg-dup');
       const sh = wrap.querySelector('.cg-shuffle');
       en.addEventListener('change', () => { group.enabled = en.checked; persistCustom(); });
-      nameEl.addEventListener('blur', () => { group.name = nameEl.textContent.trim() || '未命名'; persistCustom(); });
+      nameEl.addEventListener('blur', () => {
+        const tN = I18N_MAP[state.lang] || I18N_MAP.zh;
+        group.name = nameEl.textContent.trim() || tN.untitled || '未命名';
+        persistCustom();
+      });
       ta.addEventListener('input', () => {
         // treat entire textarea as one item now
         const val = ta.value.trim();
@@ -799,7 +839,8 @@ function main() {
       });
       dup.addEventListener('click', () => {
         const t = I18N_MAP[state.lang] || I18N_MAP.zh;
-        const copy = { id: uid(), name: (group.name || t.untitled) + t.copySuffix, enabled: group.enabled, items: (group.items || []).slice() };
+        const baseName = (group.name || t.untitled || '');
+        const copy = { id: uid(), name: baseName + (t.copySuffix || ''), enabled: group.enabled, items: (group.items || []).slice() };
         state.custom.groups.push(copy);
         persistCustom();
         renderGroups();
@@ -875,7 +916,8 @@ function main() {
     persistCustom();
   });
   addGroupBtn.addEventListener('click', () => {
-    state.custom.groups.push({ id: uid(), name: '新列表', enabled: true, items: [] });
+    const tN = I18N_MAP[state.lang] || I18N_MAP.zh;
+    state.custom.groups.push({ id: uid(), name: (tN.newListName || '新列表'), enabled: true, items: [] });
     persistCustom();
     renderGroups();
   });
