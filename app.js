@@ -521,7 +521,11 @@ const I18N_MAP = {
     labelLanguage: '语言', start: '开始游戏', again: '再来一次', back: '返回设置',
     modeSingle: '单人', modeDouble: '双人', spiceMild: '温和', spiceSpicy: '刺激',
     enable: '启用', dup: '复制', del: '删除', shuffle: '打乱', hide: '隐藏自定义内容',
-    addList: '新增列表', defaultListName: '我的惩罚', newListName: '新列表', copySuffix: ' 副本', untitled: '未命名'
+    people: '人数', mergeDefault: '合并默认', onlyCustom: '仅用自定义',
+    addList: '新列表', shuffleAll: '打乱全部',
+    defaultListName: '我的惩罚', numberA: '号码A', numberB: '号码B',
+    drawing: '抽取中…', number: '号码',
+    newListName: '新列表', copySuffix: ' 副本', untitled: '未命名'
   },
   en: {
     labelMode: 'Mode', labelSpice: 'Intensity', labelPair: 'Pick Pair', labelCustom: 'Custom',
@@ -530,89 +534,11 @@ const I18N_MAP = {
     labelLanguage: 'Language', start: 'Start', again: 'Roll Again', back: 'Back to Setup',
     modeSingle: 'Single', modeDouble: 'Double', spiceMild: 'Mild', spiceSpicy: 'Spicy',
     enable: 'Enable', dup: 'Duplicate', del: 'Delete', shuffle: 'Shuffle', hide: 'Hide custom contents',
-    addList: 'Add list', defaultListName: 'My list', newListName: 'New list', copySuffix: ' (copy)', untitled: 'Untitled',
-    people: 'People', mergeDefault: 'Merge defaults', onlyCustom: 'Custom only', shuffleAll: 'Shuffle all', numberA: 'No. A', numberB: 'No. B', drawing: 'Drawing…', number: 'No.'
-  },
-  ja: {
-    labelMode: 'モード', labelSpice: '強度', labelPair: 'ペア指定', labelCustom: 'カスタム',
-    labelEnableCustom: 'カスタム罰ゲームを有効化', helpCustom: '{A}/{B} プレースホルダー対応。有効なリストのみ抽選。',
-    labelTheme: 'テーマ', labelBgColor: '背景色', labelRainbow: 'レインボー', labelOpacity: '透明度', labelSpeed: '速度', labelBubbles: 'バブル',
-    labelLanguage: '言語', start: 'スタート', again: 'もう一回', back: '設定へ戻る',
-    modeSingle: 'ソロ', modeDouble: 'ペア', spiceMild: 'ソフト', spiceSpicy: 'スパイシー',
-    enable: '有効', dup: '複製', del: '削除', shuffle: 'シャッフル', hide: 'カスタムを非表示',
-    addList: 'リスト追加', defaultListName: 'マイリスト', newListName: '新しいリスト', copySuffix: '（コピー）', untitled: '名称未設定'
-  },
-  ko: {
-    labelMode: '모드', labelSpice: '강도', labelPair: '짝 지정', labelCustom: '사용자 지정',
-    labelEnableCustom: '사용자 지정 벌칙 사용', helpCustom: '{A}/{B} 자리표시자 지원. 활성 리스트만 추첨.',
-    labelTheme: '테마', labelBgColor: '배경색', labelRainbow: '무지개', labelOpacity: '불투명도', labelSpeed: '속도', labelBubbles: '버블',
-    labelLanguage: '언어', start: '시작', again: '다시 뽑기', back: '설정으로',
-    modeSingle: '싱글', modeDouble: '더블', spiceMild: '순한맛', spiceSpicy: '매운맛',
-    enable: '활성화', dup: '복제', del: '삭제', shuffle: '섞기', hide: '사용자 내용 숨기기',
-    addList: '리스트 추가', defaultListName: '내 리스트', newListName: '새 리스트', copySuffix: ' (복사본)', untitled: '제목 없음'
-  },
-  es: {
-    labelMode: 'Modo', labelSpice: 'Intensidad', labelPair: 'Pareja', labelCustom: 'Personalizado',
-    labelEnableCustom: 'Activar castigos personalizados', helpCustom: 'Soporta {A}/{B}. Listas activadas entran al sorteo.',
-    labelTheme: 'Tema', labelBgColor: 'Fondo', labelRainbow: 'Arcoíris', labelOpacity: 'Opacidad', labelSpeed: 'Velocidad', labelBubbles: 'Burbujas',
-    labelLanguage: 'Idioma', start: 'Comenzar', again: 'Otra vez', back: 'Volver a ajustes',
-    modeSingle: 'Individual', modeDouble: 'Doble', spiceMild: 'Suave', spiceSpicy: 'Picante',
-    enable: 'Activar', dup: 'Duplicar', del: 'Eliminar', shuffle: 'Mezclar', hide: 'Ocultar contenidos personalizados'
-  },
-  de: {
-    labelMode: 'Modus', labelSpice: 'Intensität', labelPair: 'Paar', labelCustom: 'Benutzerdefiniert',
-    labelEnableCustom: 'Eigene Strafen aktivieren', helpCustom: 'Unterstützt {A}/{B}. Aktivierte Listen werden gezogen.',
-    labelTheme: 'Thema', labelBgColor: 'Hintergrund', labelRainbow: 'Regenbogen', labelOpacity: 'Deckkraft', labelSpeed: 'Geschwindigkeit', labelBubbles: 'Blasen',
-    labelLanguage: 'Sprache', start: 'Start', again: 'Nochmal', back: 'Zurück zu Setup',
-    modeSingle: 'Einzel', modeDouble: 'Duo', spiceMild: 'Mild', spiceSpicy: 'Scharf',
-    enable: 'Aktivieren', dup: 'Duplizieren', del: 'Löschen', shuffle: 'Mischen', hide: 'Eigene Inhalte ausblenden',
-    addList: 'Neue Liste', defaultListName: 'Meine Strafen', newListName: 'Neue Liste', copySuffix: ' (Kopie)', untitled: 'Ohne Titel',
-    people: 'Personen', mergeDefault: 'Mit Standard mischen', onlyCustom: 'Nur benutzerdef.', shuffleAll: 'Alles mischen', numberA: 'Nr. A', numberB: 'Nr. B', drawing: 'Ziehung…', number: 'Nr.'
-  },
-  fr: {
-    labelMode: 'Mode', labelSpice: 'Intensité', labelPair: 'Duo', labelCustom: 'Perso',
-    labelEnableCustom: 'Activer les punitions perso', helpCustom: 'Prend {A}/{B}. Listes activées incluses au tirage.',
-    labelTheme: 'Thème', labelBgColor: 'Fond', labelRainbow: 'Arc-en-ciel', labelOpacity: 'Opacité', labelSpeed: 'Vitesse', labelBubbles: 'Bulles',
-    labelLanguage: 'Langue', start: 'Commencer', again: 'Rejouer', back: 'Retour réglages',
-    modeSingle: 'Solo', modeDouble: 'Duo', spiceMild: 'Doux', spiceSpicy: 'Épicé',
-    enable: 'Activer', dup: 'Dupliquer', del: 'Supprimer', shuffle: 'Mélanger', hide: 'Masquer contenus perso',
-    addList: 'Nouvelle liste', defaultListName: 'Mes punitions', newListName: 'Nouvelle liste', copySuffix: ' (copie)', untitled: 'Sans titre',
-    people: 'Personnes', mergeDefault: 'Mélanger défauts', onlyCustom: 'Perso seul', shuffleAll: 'Tout mélanger', numberA: 'N° A', numberB: 'N° B', drawing: 'Tirage…', number: 'N°'
-  },
-  ru: {
-    labelMode: 'Режим', labelSpice: 'Интенсивность', labelPair: 'Пара', labelCustom: 'Свои',
-    labelEnableCustom: 'Включить свои задания', helpCustom: 'Поддержка {A}/{B}. Активные списки участвуют.',
-    labelTheme: 'Тема', labelBgColor: 'Фон', labelRainbow: 'Радуга', labelOpacity: 'Непрозрачность', labelSpeed: 'Скорость', labelBubbles: 'Пузыри',
-    labelLanguage: 'Язык', start: 'Старт', again: 'Ещё раз', back: 'Назад к настройкам',
-    modeSingle: 'Один', modeDouble: 'Пара', spiceMild: 'Лёгкий', spiceSpicy: 'Жгучий',
-    enable: 'Включить', dup: 'Дублировать', del: 'Удалить', shuffle: 'Перемешать', hide: 'Скрыть свои записи'
-  },
-  pt: {
-    labelMode: 'Modo', labelSpice: 'Intensidade', labelPair: 'Par', labelCustom: 'Personalizado',
-    labelEnableCustom: 'Ativar punições personalizadas', helpCustom: 'Suporta {A}/{B}. Listas ativas entram no sorteio.',
-    labelTheme: 'Tema', labelBgColor: 'Fundo', labelRainbow: 'Arco-íris', labelOpacity: 'Opacidade', labelSpeed: 'Velocidade', labelBubbles: 'Bolinhas',
-    labelLanguage: 'Idioma', start: 'Iniciar', again: 'De novo', back: 'Voltar',
-    modeSingle: 'Individual', modeDouble: 'Dupla', spiceMild: 'Suave', spiceSpicy: 'Picante',
-    enable: 'Ativar', dup: 'Duplicar', del: 'Excluir', shuffle: 'Embaralhar', hide: 'Ocultar conteúdos',
-    people: '人数', mergeDefault: '合并默认', onlyCustom: '仅用自定义', addList: '新列表', shuffleAll: '打乱全部', defaultListName: '我的惩罚', numberA: '号码A', numberB: '号码B'
-  },
-  it: {
-    labelMode: 'Modalità', labelSpice: 'Intensità', labelPair: 'Coppia', labelCustom: 'Personalizzato',
-    labelEnableCustom: 'Abilita punizioni personalizzate', helpCustom: 'Supporta {A}/{B}. Liste attive incluse.',
-    labelTheme: 'Tema', labelBgColor: 'Sfondo', labelRainbow: 'Arcobaleno', labelOpacity: 'Opacità', labelSpeed: 'Velocità', labelBubbles: 'Bolle',
-    labelLanguage: 'Lingua', start: 'Avvia', again: 'Di nuovo', back: 'Indietro',
-    modeSingle: 'Singolo', modeDouble: 'Doppio', spiceMild: 'Leggero', spiceSpicy: 'Speziato',
-    enable: 'Attiva', dup: 'Duplica', del: 'Elimina', shuffle: 'Mescola', hide: 'Nascondi contenuti',
-    people: '人数', mergeDefault: '合并默认', onlyCustom: '仅用自定义', addList: '新列表', shuffleAll: '打乱全部', defaultListName: '我的惩罚', numberA: '号码A', numberB: '号码B'
-  },
-  th: {
-    labelMode: 'โหมด', labelSpice: 'ความเข้ม', labelPair: 'เลือกคู่', labelCustom: 'กำหนดเอง',
-    labelEnableCustom: 'เปิดใช้งานบทลงโทษกำหนดเอง', helpCustom: 'รองรับ {A}/{B} รายการที่เปิดจะถูกสุ่ม',
-    labelTheme: 'ธีม', labelBgColor: 'พื้นหลัง', labelRainbow: 'สีรุ้ง', labelOpacity: 'ความทึบ', labelSpeed: 'ความเร็ว', labelBubbles: 'ฟองอากาศ',
-    labelLanguage: 'ภาษา', start: 'เริ่ม', again: 'สุ่มอีก', back: 'กลับ',
-    modeSingle: 'เดี่ยว', modeDouble: 'คู่', spiceMild: 'เบา', spiceSpicy: 'จัด',
-    enable: 'เปิด', dup: 'ทำซ้ำ', del: 'ลบ', shuffle: 'สับไพ่', hide: 'ซ่อนเนื้อหา',
-    people: '人数', mergeDefault: '合并默认', onlyCustom: '仅用自定义', addList: '新列表', shuffleAll: '打乱全部', defaultListName: '我的惩罚', numberA: '号码A', numberB: '号码B'
+    people: 'People', mergeDefault: 'Merge defaults', onlyCustom: 'Custom only',
+    addList: 'New list', shuffleAll: 'Shuffle all',
+    defaultListName: 'My punishments', numberA: 'No. A', numberB: 'No. B',
+    drawing: 'Drawing…', number: 'No.',
+    newListName: 'New list', copySuffix: ' (copy)', untitled: 'Untitled'
   }
 };
 
@@ -788,7 +714,7 @@ function main() {
     const savedTheme = JSON.parse(localStorage.getItem('pparty.theme') || 'null');
     if (savedTheme) applyTheme(savedTheme);
     const savedLang = localStorage.getItem('pparty.lang');
-    if (savedLang) state.lang = savedLang;
+    if (savedLang) state.lang = (savedLang === 'zh' || savedLang === 'en') ? savedLang : 'zh';
   } catch (e) {}
   // reflect to UI
   customEnable.checked = state.custom.enabled;
